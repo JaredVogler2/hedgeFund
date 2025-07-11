@@ -1,0 +1,124 @@
+2025-07-11 15:42:03,318 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 15:42:04,048 - main_trading_system - INFO - Initializing Professional ML Trading System...
+2025-07-11 15:42:04,048 - main_trading_system - INFO - Configuration loaded from config.json
+2025-07-11 15:42:04,048 - main_trading_system - INFO - Initializing core components...
+2025-07-11 15:44:26,829 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 15:44:27,087 - main_trading_system - INFO - Initializing Professional ML Trading System...
+2025-07-11 15:44:27,087 - main_trading_system - INFO - Configuration loaded from config.json
+2025-07-11 15:44:27,087 - main_trading_system - INFO - Initializing core components...
+2025-07-11 15:44:27,090 - ml_trading_core - INFO - ML Trading System initialized
+2025-07-11 15:44:27,090 - main_trading_system - INFO - Core components initialized
+2025-07-11 15:44:27,090 - main_trading_system - INFO - Initializing ML components...
+2025-07-11 15:44:27,091 - main_trading_system - INFO - ML components initialized
+2025-07-11 15:44:27,091 - main_trading_system - INFO - Initializing trading components...
+2025-07-11 15:44:27,685 - alpaca_trading_engine - INFO - Connected to Alpaca. Account: PA3QXP6XQDKF
+2025-07-11 15:44:27,685 - alpaca_trading_engine - INFO - Buying Power: $15,943.27
+2025-07-11 15:44:27,685 - alpaca_trading_engine - INFO - Portfolio Value: $10,246.93
+2025-07-11 15:44:27,718 - alpaca_trading_engine - INFO - Synced 10 positions
+2025-07-11 15:44:27,762 - alpaca_trading_engine - INFO - Synced 0 pending orders
+2025-07-11 15:44:27,762 - news_sentiment_analyzer - WARNING - NewsAPI key not configured, some sources will be unavailable
+2025-07-11 15:44:27,763 - main_trading_system - INFO - Trading components initialized
+2025-07-11 15:44:27,763 - main_trading_system - INFO - Initializing automation...
+2025-07-11 15:46:16,411 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 15:46:16,675 - main_trading_system - INFO - Initializing Professional ML Trading System...
+2025-07-11 15:46:16,675 - main_trading_system - INFO - Configuration loaded from config.json
+2025-07-11 15:46:16,675 - main_trading_system - INFO - Initializing core components...
+2025-07-11 15:46:16,677 - ml_trading_core - INFO - ML Trading System initialized
+2025-07-11 15:46:16,677 - main_trading_system - INFO - Core components initialized
+2025-07-11 15:46:16,677 - main_trading_system - INFO - Initializing ML components...
+2025-07-11 15:46:16,677 - main_trading_system - INFO - ML components initialized
+2025-07-11 15:46:16,677 - main_trading_system - INFO - Initializing trading components...
+2025-07-11 15:46:17,057 - alpaca_trading_engine - INFO - Connected to Alpaca. Account: PA3QXP6XQDKF
+2025-07-11 15:46:17,058 - alpaca_trading_engine - INFO - Buying Power: $15,942.61
+2025-07-11 15:46:17,059 - alpaca_trading_engine - INFO - Portfolio Value: $10,246.54
+2025-07-11 15:46:17,094 - alpaca_trading_engine - INFO - Synced 10 positions
+2025-07-11 15:46:17,135 - alpaca_trading_engine - INFO - Synced 0 pending orders
+2025-07-11 15:46:17,136 - news_sentiment_analyzer - WARNING - NewsAPI key not configured, some sources will be unavailable
+2025-07-11 15:46:17,136 - main_trading_system - INFO - Trading components initialized
+2025-07-11 15:46:17,136 - main_trading_system - INFO - Initializing automation...
+2025-07-11 15:46:17,174 - automation_scheduler - INFO - All jobs scheduled successfully
+2025-07-11 15:46:17,174 - main_trading_system - INFO - Automation initialized
+2025-07-11 15:46:17,174 - main_trading_system - INFO - ML Trading System initialized successfully
+2025-07-11 15:48:43,447 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 15:48:43,700 - main_trading_system - INFO - Initializing Professional ML Trading System...
+2025-07-11 15:48:43,701 - main_trading_system - INFO - Configuration loaded from config.json
+2025-07-11 15:48:43,701 - main_trading_system - INFO - Initializing core components...
+2025-07-11 15:48:43,702 - ml_trading_core - INFO - ML Trading System initialized
+2025-07-11 15:48:43,702 - main_trading_system - INFO - Core components initialized
+2025-07-11 15:48:43,702 - main_trading_system - INFO - Initializing ML components...
+2025-07-11 15:48:43,702 - main_trading_system - INFO - ML components initialized
+2025-07-11 15:48:43,702 - main_trading_system - INFO - Initializing trading components...
+2025-07-11 15:48:44,072 - alpaca_trading_engine - INFO - Connected to Alpaca. Account: PA3QXP6XQDKF
+2025-07-11 15:48:44,072 - alpaca_trading_engine - INFO - Buying Power: $15,943.64
+2025-07-11 15:48:44,072 - alpaca_trading_engine - INFO - Portfolio Value: $10,247.55
+2025-07-11 15:48:44,101 - alpaca_trading_engine - INFO - Synced 10 positions
+2025-07-11 15:48:44,132 - alpaca_trading_engine - INFO - Synced 0 pending orders
+2025-07-11 15:48:44,132 - news_sentiment_analyzer - WARNING - NewsAPI key not configured, some sources will be unavailable
+2025-07-11 15:48:44,132 - main_trading_system - INFO - Trading components initialized
+2025-07-11 15:48:44,132 - main_trading_system - INFO - Initializing automation...
+2025-07-11 15:48:44,163 - automation_scheduler - INFO - All jobs scheduled successfully
+2025-07-11 15:48:44,163 - main_trading_system - INFO - Automation initialized
+2025-07-11 15:48:44,163 - main_trading_system - INFO - ML Trading System initialized successfully
+2025-07-11 15:51:14,020 - ml_trading_core - INFO - ML Trading System initialized
+2025-07-11 15:56:48,683 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 15:56:49,252 - main_trading_system - INFO - Initializing Professional ML Trading System...
+2025-07-11 15:56:49,253 - main_trading_system - INFO - Configuration loaded from config.json
+2025-07-11 15:56:49,253 - main_trading_system - INFO - Initializing core components...
+2025-07-11 15:56:49,254 - ml_trading_core - INFO - ML Trading System initialized
+2025-07-11 15:56:49,254 - main_trading_system - INFO - Core components initialized
+2025-07-11 15:56:49,254 - main_trading_system - INFO - Initializing ML components...
+2025-07-11 15:56:49,254 - main_trading_system - INFO - ML components initialized
+2025-07-11 15:56:49,254 - main_trading_system - INFO - Initializing trading components...
+2025-07-11 15:56:49,575 - alpaca_trading_engine - INFO - Connected to Alpaca. Account: PA3QXP6XQDKF
+2025-07-11 15:56:49,576 - alpaca_trading_engine - INFO - Buying Power: $15,939.70
+2025-07-11 15:56:49,576 - alpaca_trading_engine - INFO - Portfolio Value: $10,243.39
+2025-07-11 15:56:49,611 - alpaca_trading_engine - INFO - Synced 10 positions
+2025-07-11 15:56:49,646 - alpaca_trading_engine - INFO - Synced 0 pending orders
+2025-07-11 15:56:49,647 - news_sentiment_analyzer - WARNING - NewsAPI key not configured, some sources will be unavailable
+2025-07-11 15:56:49,647 - main_trading_system - INFO - Trading components initialized
+2025-07-11 15:56:49,648 - main_trading_system - INFO - Initializing automation...
+2025-07-11 15:56:49,684 - automation_scheduler - INFO - All jobs scheduled successfully
+2025-07-11 15:56:49,684 - main_trading_system - INFO - Automation initialized
+2025-07-11 15:56:49,684 - main_trading_system - INFO - ML Trading System initialized successfully
+2025-07-11 15:58:36,660 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 15:58:37,242 - main_trading_system - INFO - Initializing Professional ML Trading System...
+2025-07-11 15:58:37,242 - main_trading_system - INFO - Configuration loaded from config.json
+2025-07-11 15:58:37,242 - main_trading_system - INFO - Initializing core components...
+2025-07-11 15:58:37,244 - ml_trading_core - INFO - ML Trading System initialized
+2025-07-11 15:58:37,244 - main_trading_system - INFO - Core components initialized
+2025-07-11 15:58:37,244 - main_trading_system - INFO - Initializing ML components...
+2025-07-11 15:58:37,244 - main_trading_system - INFO - ML components initialized
+2025-07-11 15:58:37,244 - main_trading_system - INFO - Initializing trading components...
+2025-07-11 15:58:37,667 - alpaca_trading_engine - INFO - Connected to Alpaca. Account: PA3QXP6XQDKF
+2025-07-11 15:58:37,667 - alpaca_trading_engine - INFO - Buying Power: $15,938.00
+2025-07-11 15:58:37,669 - alpaca_trading_engine - INFO - Portfolio Value: $10,242.66
+2025-07-11 15:58:37,706 - alpaca_trading_engine - INFO - Synced 10 positions
+2025-07-11 15:58:37,742 - alpaca_trading_engine - INFO - Synced 0 pending orders
+2025-07-11 15:58:37,743 - news_sentiment_analyzer - WARNING - NewsAPI key not configured, some sources will be unavailable
+2025-07-11 15:58:37,743 - main_trading_system - INFO - Trading components initialized
+2025-07-11 15:58:37,744 - main_trading_system - INFO - Initializing automation...
+2025-07-11 15:58:37,786 - automation_scheduler - INFO - All jobs scheduled successfully
+2025-07-11 15:58:37,786 - main_trading_system - INFO - Automation initialized
+2025-07-11 15:58:37,786 - main_trading_system - INFO - ML Trading System initialized successfully
+2025-07-11 15:59:56,484 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 16:00:53,921 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 16:03:29,000 - ensemble_ml_system - INFO - Using GPU: NVIDIA GeForce RTX 3070 Ti Laptop GPU
+2025-07-11 16:03:31,633 - main_trading_system - INFO - Initializing Professional ML Trading System...
+2025-07-11 16:03:31,635 - main_trading_system - INFO - Configuration loaded from config.json
+2025-07-11 16:03:31,636 - main_trading_system - INFO - Initializing core components...
+2025-07-11 16:03:31,655 - ml_trading_core - INFO - ML Trading System initialized
+2025-07-11 16:03:31,655 - main_trading_system - INFO - Core components initialized
+2025-07-11 16:03:31,655 - main_trading_system - INFO - Initializing ML components...
+2025-07-11 16:03:31,662 - main_trading_system - INFO - ML components initialized
+2025-07-11 16:03:31,662 - main_trading_system - INFO - Initializing trading components...
+2025-07-11 16:03:32,856 - alpaca_trading_engine - INFO - Connected to Alpaca. Account: PA3QXP6XQDKF
+2025-07-11 16:03:32,862 - alpaca_trading_engine - INFO - Buying Power: $15,937.02
+2025-07-11 16:03:32,862 - alpaca_trading_engine - INFO - Portfolio Value: $10,240.61
+2025-07-11 16:03:32,898 - alpaca_trading_engine - INFO - Synced 10 positions
+2025-07-11 16:03:32,932 - alpaca_trading_engine - INFO - Synced 0 pending orders
+2025-07-11 16:03:32,932 - news_sentiment_analyzer - WARNING - NewsAPI key not configured, some sources will be unavailable
+2025-07-11 16:03:32,932 - main_trading_system - INFO - Trading components initialized
+2025-07-11 16:03:32,938 - main_trading_system - INFO - Initializing automation...
+2025-07-11 16:03:33,120 - automation_scheduler - INFO - All jobs scheduled successfully
+2025-07-11 16:03:33,120 - main_trading_system - INFO - Automation initialized
+2025-07-11 16:03:33,120 - main_trading_system - INFO - ML Trading System initialized successfully

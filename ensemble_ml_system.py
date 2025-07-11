@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader, TensorDataset
 import xgboost as xgb
 import lightgbm as lgb
 import catboost as cb
-from sklearn.model_selection import TimeSeriesSplit, PurgedGroupTimeSeriesSplit
+from sklearn.model_selection import TimeSeriesSplit #, PurgedGroupTimeSeriesSplit
 from sklearn.preprocessing import StandardScaler, QuantileTransformer
 from sklearn.isotonic import IsotonicRegression
 from sklearn.ensemble import VotingClassifier, VotingRegressor

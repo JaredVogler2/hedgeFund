@@ -155,10 +155,10 @@ class TradingAutomation:
         schedule.every().sunday.at("18:00").do(
             self._run_job, "weekly_analysis", self.run_weekly_analysis
         )
-        
-        # Monthly jobs
-        schedule.every().month.do(
-            self._run_job, "monthly_report", self.run_monthly_report
+
+        # Monthly jobs - run on the 1st of each month
+        schedule.every().day.at("06:00").do(
+            lambda: self._run_job("monthly_report", self.run_monthly_report) if datetime.now().day == 1 else None
         )
         
         logger.info("All jobs scheduled successfully")

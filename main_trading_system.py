@@ -110,13 +110,14 @@ class ProfessionalMLTradingSystem:
     def _initialize_core_components(self):
         """Initialize core system components"""
         logger.info("Initializing core components...")
-        
+
         # System configuration
-        self.system_config = SystemConfig(
-            initial_capital=self.config['system']['initial_capital'],
-            max_positions=self.config['system']['max_positions'],
-            max_position_size=self.config['system']['max_position_size']
-        )
+        self.system_config = SystemConfig()
+        # Set values after creation
+        self.system_config.max_positions = self.config['system']['max_positions']
+        self.system_config.max_position_size = self.config['system']['max_position_size']
+        # Store initial capital separately
+        self.initial_capital = self.config['system']['initial_capital']
         
         # Core trading system
         self.core_system = MLTradingSystem(self.system_config)
