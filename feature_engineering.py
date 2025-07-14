@@ -187,7 +187,7 @@ class ChartPatternDetector:
 
         return pattern
 
-class AdvancedFeatureEngineer(ChartPatternDetector):
+class EnhancedFeatureEngineer(ChartPatternDetector):
     """Enhanced feature engineering with all requested features"""
 
     def __init__(self, config: Optional[FeatureConfig] = None):
@@ -217,15 +217,15 @@ class AdvancedFeatureEngineer(ChartPatternDetector):
 
             # 2. VOLUME FEATURES
             logger.info("Generating volume features...")
-            features.update(self._generate_volume_features(close, volume))
+            features.update(self._generate_volume_features(close, volume, high, low))
 
             # 3. TECHNICAL INDICATORS
             logger.info("Generating technical indicators...")
-            features.update(self._generate_technical_indicators(close, high, low, volume))
+            features.update(self._generate_technical_indicators(close, high, low, volume, open_))
 
             # 4. VOLATILITY FEATURES
             logger.info("Generating volatility features...")
-            features.update(self._generate_volatility_features(close, high, low))
+            features.update(self._generate_volatility_features(close, high, low, open_))
 
             # 5. CHART PATTERNS
             if self.config.use_patterns:
@@ -243,7 +243,7 @@ class AdvancedFeatureEngineer(ChartPatternDetector):
             # 8. MARKET MICROSTRUCTURE
             if self.config.use_microstructure:
                 logger.info("Generating microstructure features...")
-                features.update(self._generate_microstructure_features(close, high, low, volume))
+                features.update(self._generate_microstructure_features(close, high, low, volume, open_))
 
             # 9. FEATURE INTERACTIONS (Golden Cross, etc.)
             if self.config.use_interactions:
@@ -314,7 +314,7 @@ class AdvancedFeatureEngineer(ChartPatternDetector):
 
         return features
 
-    def _generate_volume_features(self, close, volume):
+    def _generate_volume_features(self, close, volume, high, low):
         """Generate volume-based features"""
         features = {}
 
@@ -363,7 +363,7 @@ class AdvancedFeatureEngineer(ChartPatternDetector):
 
         return features
 
-    def _generate_technical_indicators(self, close, high, low, volume):
+    def _generate_technical_indicators(self, close, high, low, volume, open_):
         """Generate technical indicators using TA-Lib where available"""
         features = {}
 
@@ -437,7 +437,7 @@ class AdvancedFeatureEngineer(ChartPatternDetector):
 
         return features
 
-    def _generate_volatility_features(self, close, high, low):
+    def _generate_volatility_features(self, close, high, low, open_):
         """Generate volatility features"""
         features = {}
 
@@ -478,8 +478,8 @@ class AdvancedFeatureEngineer(ChartPatternDetector):
 
         # Yang-Zhang volatility (most accurate)
         for period in [20]:
-            overnight = np.log(open / close.shift(1))
-            open_close = np.log(close / open)
+            overnight = np.log(open_ / close.shift(1))
+            open_close = np.log(close / open_)
 
             overnight_var = overnight.rolling(period).var()
             open_close_var = open_close.rolling(period).var()
@@ -651,13 +651,13 @@ class AdvancedFeatureEngineer(ChartPatternDetector):
 
         return features
 
-    def _generate_microstructure_features(self, close, high, low, volume):
+    def _generate_microstructure_features(self, close, high, low, volume, open_):
         """Generate market microstructure features"""
         features = {}
 
         # Spread measures
         features['hl_spread'] = (high - low) / close
-        features['co_spread'] = np.abs(close - open) / close
+        features['co_spread'] = np.abs(close - open_) / close
 
         # Liquidity measures
         features['turnover'] = volume / volume.rolling(20).mean()

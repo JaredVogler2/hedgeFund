@@ -328,7 +328,7 @@ class ProfessionalMLTradingSystem:
 
         return should_retrain
 
-    def _retrain_models_safe(self):
+    def _retrain_models(self):
         """Retrain ML models with proper data leakage prevention"""
         logger.info("Retraining models with purged cross-validation...")
         logger.info(f"Training period: {TRAINING_START_DATE.date()} to {CURRENT_DATE.date()}")
