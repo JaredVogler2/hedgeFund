@@ -2,7 +2,7 @@
 Main ML Trading System Orchestrator - UPDATED WITH DATA LEAKAGE FIXES
 Professional-grade trading system with proper time series handling
 """
-
+import pytz
 import os
 import sys
 import json
@@ -43,7 +43,8 @@ logger = logging.getLogger(__name__)
 warnings.filterwarnings('ignore')
 
 # Set current date (July 12, 2025)
-CURRENT_DATE = pd.Timestamp('2025-07-12')
+#CURRENT_DATE = pd.Timestamp('2025-07-12')
+CURRENT_DATE = datetime.now(pytz.timezone('America/New_York')).replace(hour=0, minute=0, second=0, microsecond=0)
 TRAINING_START_DATE = CURRENT_DATE - pd.DateOffset(years=5)  # July 12, 2020
 
 class ProfessionalMLTradingSystem:
@@ -254,33 +255,37 @@ class ProfessionalMLTradingSystem:
             raise
 
     def _update_market_data(self):
-        """Update market data for all symbols up to current date only"""
+        """Update market data for all symbols"""
         logger.info("Updating market data...")
 
         symbols = self.watchlist_manager.get_all_symbols()
-
-        # Calculate period from training start to current date
-        days_diff = (CURRENT_DATE - TRAINING_START_DATE).days
-        period = f"{days_diff}d"
-
         self.market_data = {}
 
-        for symbol in symbols:
-            data = self.data_manager.get_symbol_data(symbol, period=period)
+        # Process in batches to avoid overwhelming the API
+        batch_size = 50
+        for i in range(0, len(symbols), batch_size):
+            batch = symbols[i:i + batch_size]
+            batch_data = self.data_manager.get_batch_data(
+                batch,
+                period=f"{self.config['data']['lookback_years']}y"
+            )
 
-            # CRITICAL: Ensure we don't have future data
-            if not data.empty:
-                # Filter to ensure no data beyond current date
-                data = data[data.index <= CURRENT_DATE]
+            # Filter data to current date for each symbol
+            for symbol, data in batch_data.items():
+                if not data.empty:
+                    # Ensure index is timezone-aware
+                    if data.index.tz is None:
+                        # If data has no timezone, assume it's in Eastern Time
+                        data.index = data.index.tz_localize('America/New_York')
+                    elif data.index.tz != pytz.timezone('America/New_York'):
+                        # Convert to Eastern Time if different timezone
+                        data.index = data.index.tz_convert('America/New_York')
 
-                # Verify date range
-                if data.index.min() < pd.Timestamp('1990-01-01'):
-                    logger.error(f"Invalid historical data for {symbol}, skipping")
-                    continue
+                    # Now safe to compare - both are timezone-aware
+                    data = data[data.index <= CURRENT_DATE]
 
-                if len(data) >= self.config['data']['min_samples_required']:
-                    self.market_data[symbol] = data
-                    logger.debug(f"{symbol}: {len(data)} days from {data.index.min().date()} to {data.index.max().date()}")
+                    if not data.empty:
+                        self.market_data[symbol] = data
 
         logger.info(f"Updated data for {len(self.market_data)} symbols")
 
