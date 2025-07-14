@@ -2,6 +2,7 @@
 Advanced Feature Engineering with ML-Learned Patterns
 Includes both traditional features and ML-specific learned features
 Properly handles yfinance data formats
+FIXED: StandardScaler state management
 """
 
 import numpy as np
@@ -138,6 +139,12 @@ class MLFeatureEngineer:
         self.pattern_embedder = None
         self.feature_scaler = StandardScaler()
 
+        # FIXED: Add scaler state tracking
+        self.scaler_fitted = False
+
+        # Add this line to store feature names
+        self._feature_names = []
+
         # Store learned patterns
         self.market_regimes = {}
         self.pattern_library = []
@@ -145,6 +152,27 @@ class MLFeatureEngineer:
 
         # Device for neural networks
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+        # Model directory
+        self.models_dir = 'models'
+
+        # FIXED: Try to load existing models including scaler
+        self._try_load_models()
+
+    def _try_load_models(self):
+        """Try to load existing models if available"""
+        if os.path.exists(self.models_dir):
+            try:
+                scaler_path = f"{self.models_dir}/feature_scaler.pkl"
+                if os.path.exists(scaler_path):
+                    self.feature_scaler = joblib.load(scaler_path)
+                    self.scaler_fitted = True
+                    self.logger.info("Loaded existing feature scaler")
+
+                # Try loading other models
+                self.load_models(self.models_dir)
+            except Exception as e:
+                self.logger.warning(f"Could not load models: {e}")
 
     def engineer_features(self, data: pd.DataFrame,
                          training_mode: bool = False,
@@ -205,9 +233,17 @@ class MLFeatureEngineer:
             # Final cleanup
             final_features = self._handle_missing_values(final_features)
 
+            # IMPORTANT: Store feature names before returning
+            self._feature_names = final_features.columns.tolist()
+
             self.logger.info(f"Generated {len(final_features.columns)} total features")
 
+            # FIXED: Save models after training
+            if training_mode:
+                self.save_models(self.models_dir)
+
             return final_features
+
 
         except Exception as e:
             self.logger.error(f"Error in feature generation: {e}")
@@ -237,7 +273,20 @@ class MLFeatureEngineer:
 
         # Prepare data
         X = traditional_features.values
-        X_scaled = self.feature_scaler.fit_transform(X) if training_mode else self.feature_scaler.transform(X)
+        X = np.nan_to_num(X, nan=0, posinf=0, neginf=0)
+
+        # FIXED: Proper scaler handling
+        if training_mode:
+            self.logger.info("Fitting feature scaler...")
+            X_scaled = self.feature_scaler.fit_transform(X)
+            self.scaler_fitted = True
+        else:
+            if not self.scaler_fitted:
+                self.logger.warning("Feature scaler not fitted, fitting now...")
+                X_scaled = self.feature_scaler.fit_transform(X)
+                self.scaler_fitted = True
+            else:
+                X_scaled = self.feature_scaler.transform(X)
 
         # 1. Autoencoder features
         if self.config.use_autoencoder:
@@ -760,25 +809,39 @@ class MLFeatureEngineer:
         if self.pca_model is not None:
             joblib.dump(self.pca_model, f"{path}/pca_model.pkl")
 
-        # Save scalers and other objects
+        # FIXED: Save scaler with state flag
         joblib.dump(self.feature_scaler, f"{path}/feature_scaler.pkl")
+        joblib.dump(self.scaler_fitted, f"{path}/scaler_fitted.pkl")
+
+        # Save other objects
         joblib.dump(self.market_regimes, f"{path}/market_regimes.pkl")
         joblib.dump(self.pattern_library, f"{path}/pattern_library.pkl")
         joblib.dump(self.feature_interactions, f"{path}/feature_interactions.pkl")
 
         self.logger.info(f"Saved ML models to {path}")
 
+    def get_feature_names(self) -> List[str]:
+        """Get list of all feature names"""
+        return self._feature_names.copy() if self._feature_names else []
+
+    def get_n_features(self) -> int:
+        """Get number of features"""
+        return len(self._feature_names)
+
     def load_models(self, path: str):
         """Load ML models and learned patterns"""
         # Load neural network models
         if os.path.exists(f"{path}/autoencoder.pth"):
-            self.autoencoder = Autoencoder(150, self.config.autoencoder_latent_dim).to(self.device)
-            self.autoencoder.load_state_dict(torch.load(f"{path}/autoencoder.pth"))
+            # Need to determine input dim - use a default or stored value
+            input_dim = 150  # You might want to store this
+            self.autoencoder = Autoencoder(input_dim, self.config.autoencoder_latent_dim).to(self.device)
+            self.autoencoder.load_state_dict(torch.load(f"{path}/autoencoder.pth", map_location=self.device))
             self.autoencoder.eval()
 
         if os.path.exists(f"{path}/pattern_embedder.pth"):
-            self.pattern_embedder = PatternEmbedder(150, self.config.embedding_dim).to(self.device)
-            self.pattern_embedder.load_state_dict(torch.load(f"{path}/pattern_embedder.pth"))
+            input_dim = 150  # You might want to store this
+            self.pattern_embedder = PatternEmbedder(input_dim, self.config.embedding_dim).to(self.device)
+            self.pattern_embedder.load_state_dict(torch.load(f"{path}/pattern_embedder.pth", map_location=self.device))
             self.pattern_embedder.eval()
 
         # Load sklearn models
@@ -788,10 +851,14 @@ class MLFeatureEngineer:
         if os.path.exists(f"{path}/pca_model.pkl"):
             self.pca_model = joblib.load(f"{path}/pca_model.pkl")
 
-        # Load other objects
+        # FIXED: Load scaler with state
         if os.path.exists(f"{path}/feature_scaler.pkl"):
             self.feature_scaler = joblib.load(f"{path}/feature_scaler.pkl")
 
+        if os.path.exists(f"{path}/scaler_fitted.pkl"):
+            self.scaler_fitted = joblib.load(f"{path}/scaler_fitted.pkl")
+
+        # Load other objects
         if os.path.exists(f"{path}/market_regimes.pkl"):
             self.market_regimes = joblib.load(f"{path}/market_regimes.pkl")
 
